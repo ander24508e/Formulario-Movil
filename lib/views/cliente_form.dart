@@ -24,19 +24,24 @@ class _ClienteFormState extends State<ClienteForm> {
     return null;
   }
 
+  void _limpiar() {
+    _apellidoController.clear();
+    _nombreController.clear();
+    _correoController.clear();
+    _telefonoController.clear();
+    setState(() {
+      _sexo = null;
+      _estadoCivil = null;
+      _isSubmitted = false;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.deepPurple,
-        leading: const Icon(Icons.menu),
         actions: [
-          IconButton(
-            icon: const Icon(Icons.search, color: Colors.black),
-            onPressed: () {
-              Navigator.pushNamed(context, 'menu_form');
-            },
-          ),
           IconButton(
             onPressed: () => {},
             icon: const Icon(Icons.more_vert, color: Colors.black),
@@ -51,6 +56,12 @@ class _ClienteFormState extends State<ClienteForm> {
           ),
         ),
         centerTitle: true,
+        leading: IconButton(
+          icon: const Icon(Icons.arrow_back, color: Colors.black),
+          onPressed: () {
+            Navigator.pushNamed(context, 'menu_form');
+          },
+        ),
       ),
       body: Padding(
         padding: const EdgeInsets.all(20),
@@ -243,14 +254,12 @@ class _ClienteFormState extends State<ClienteForm> {
                 child: const Text("REGISTRAR"),
               ),
               const SizedBox(height: 5),
-              // BOTÓN VOLVER
+              // BOTÓN LIMPIAR
               ElevatedButton(
-                onPressed: () {
-                  Navigator.pushNamed(context, 'menu_form');
-                },
-                child: const Text("VOLVER"),
-                
+                onPressed: _limpiar,
+                child: const Text("LIMPIAR"),
               ),
+              const SizedBox(height: 5),
             ],
           ),
         ),

@@ -32,7 +32,7 @@ class _LoginFormState extends State<LoginForm> {
       appBar: AppBar(
         backgroundColor: Colors.deepPurple,
         title: Text(
-          'Formulario Clientes'.toUpperCase(),
+          'FORMULARIO MOVIL'.toUpperCase(),
           style: GoogleFonts.dmSerifDisplay(
             color: Colors.black,
             fontSize: 20,
