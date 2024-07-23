@@ -84,7 +84,7 @@ class _MenuFormPageState extends State<MenuForm> {
                   ),
                 ),
                 onTap: () {
-                  Navigator.pop(context);
+                  Navigator.pushNamed(context, 'orden_form');
                 }),
             ListTile(
                 leading: const Icon(

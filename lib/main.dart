@@ -3,6 +3,7 @@ import 'views/cliente_form.dart';
 import 'views/login_form.dart';
 import 'views/menu_form.dart';
 import 'views/encuesta_form.dart';
+import 'views/orden_form.dart';
 
 void main() {
   runApp(const FormularioApp());
@@ -23,7 +24,8 @@ class FormularioApp extends StatelessWidget {
         routes: {
           'cliente_form': (context) => ClienteForm(),
           'menu_form': (context) => MenuForm(),
-          'encuesta_form': (context) => EncuestaForm()
+          'encuesta_form': (context) => EncuestaForm(),
+          'orden_form': (context) => OrdenForm()
         });
   }
 }
