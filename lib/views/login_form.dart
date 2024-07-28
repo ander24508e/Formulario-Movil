@@ -29,10 +29,11 @@ class _LoginFormState extends State<LoginForm> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.white, // Fondo de la app en negro
       appBar: AppBar(
-        backgroundColor: Colors.deepPurple,
+        backgroundColor: Colors.teal,
         title: Text(
-          'FORMULARIO MOVIL'.toUpperCase(),
+          'FORMULARIO PUCE'.toUpperCase(),
           style: GoogleFonts.dmSerifDisplay(
             color: Colors.black,
             fontSize: 20,
@@ -46,14 +47,14 @@ class _LoginFormState extends State<LoginForm> {
           padding: const EdgeInsets.all(20),
           margin: const EdgeInsets.all(20),
           decoration: BoxDecoration(
-            color: Colors.white,
+            color: Colors.teal,
             borderRadius: BorderRadius.circular(20),
             boxShadow: [
               BoxShadow(
-                color: Colors.grey.withOpacity(0.5),
+                color: Colors.black.withOpacity(0.5),
                 spreadRadius: 5,
                 blurRadius: 7,
-                offset: Offset(0, 3), // changes position of shadow
+                offset: Offset(0, 3), // Cambia la posición de la sombra
               ),
             ],
           ),
@@ -76,15 +77,17 @@ class _LoginFormState extends State<LoginForm> {
                   controller: _usernameController,
                   decoration: InputDecoration(
                     enabledBorder: OutlineInputBorder(
-                        borderSide: const BorderSide(color: Colors.black12),
+                        borderSide: const BorderSide(color: Colors.black),
                         borderRadius: BorderRadius.circular(20)),
                     focusedBorder: OutlineInputBorder(
-                        borderSide: const BorderSide(
-                            color: Color.fromARGB(242, 34, 34, 34)),
+                        borderSide: const BorderSide(color: Colors.white),
                         borderRadius: BorderRadius.circular(20)),
                     hintText: "Usuario".toUpperCase(),
                     prefixIcon: const Icon(Icons.person_outline),
                     prefixIconColor: const Color.fromARGB(242, 34, 34, 34),
+                  ),
+                  style: GoogleFonts.dmSerifDisplay(
+                    color: Colors.white,
                   ),
                   validator: _validateUsername,
                 ),
@@ -93,39 +96,60 @@ class _LoginFormState extends State<LoginForm> {
                   controller: _passwordController,
                   decoration: InputDecoration(
                     enabledBorder: OutlineInputBorder(
-                        borderSide: const BorderSide(color: Colors.black12),
+                        borderSide: const BorderSide(color: Colors.black),
                         borderRadius: BorderRadius.circular(20)),
                     focusedBorder: OutlineInputBorder(
-                        borderSide: const BorderSide(
-                            color: Color.fromARGB(242, 34, 34, 34)),
+                        borderSide: const BorderSide(color: Colors.white),
                         borderRadius: BorderRadius.circular(20)),
                     hintText: "Contraseña".toUpperCase(),
                     prefixIcon: const Icon(Icons.lock),
                     prefixIconColor: const Color.fromARGB(242, 34, 34, 34),
                   ),
                   obscureText: true,
+                  style: GoogleFonts.dmSerifDisplay(
+                    color: Colors.white,
+                  ),
                   validator: _validatePassword,
                 ),
                 const SizedBox(height: 20),
-                ElevatedButton(
-                  onPressed: () {
-                    if (_formKey.currentState!.validate()) {
-                      if (_usernameController.text != 'ander') {
-                        ScaffoldMessenger.of(context).showSnackBar(
-                          const SnackBar(content: Text("Usuario incorrecto")),
-                        );
-                      } else if (_passwordController.text != clave_correcta) {
-                        ScaffoldMessenger.of(context).showSnackBar(
-                          const SnackBar(
-                              content: Text("Contraseña incorrecta")),
-                        );
-                      } else {
-                        Navigator.pushNamed(context, 'menu_form');
-                      }
-                    }
-                  },
-                  child: const Text("INICIAR SESIÓN"),
-                )
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    ElevatedButton(
+                      onPressed: () {
+                        if (_formKey.currentState!.validate()) {
+                          if (_usernameController.text != 'ander') {
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              const SnackBar(
+                                  content: Text("Usuario incorrecto")),
+                            );
+                          } else if (_passwordController.text !=
+                              clave_correcta) {
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              const SnackBar(
+                                  content: Text("Contraseña incorrecta")),
+                            );
+                          } else {
+                            Navigator.pushNamed(context, 'menu_form');
+                          }
+                        }
+                      },
+                      child: const Text(
+                        "INICIAR SESIÓN",
+                        style: TextStyle(color: Colors.black),
+                      ),
+                    ),
+                    ElevatedButton(
+                      onPressed: () {
+                        Navigator.pushNamed(context, 'register_form');
+                      },
+                      child: const Text(
+                        "REGISTRARSE",
+                        style: TextStyle(color: Colors.black),
+                      ),
+                    ),
+                  ],
+                ),
               ],
             ),
           ),

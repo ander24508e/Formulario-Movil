@@ -18,7 +18,7 @@ class _MenuFormPageState extends State<MenuForm> {
           children: <Widget>[
             const DrawerHeader(
                 decoration: BoxDecoration(
-                  color: Colors.blue,
+                  color: Colors.teal,
                 ),
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
@@ -29,9 +29,9 @@ class _MenuFormPageState extends State<MenuForm> {
                             AssetImage('lib/imagenes/logopuce.png')),
                     SizedBox(height: 10),
                     Text(
-                      'ADMINISTRACIÓN',
+                      'ANDER',
                       style: TextStyle(
-                        color: Colors.white,
+                        color: Colors.black,
                         fontSize: 20,
                         fontWeight: FontWeight.bold,
                       ),
@@ -41,7 +41,7 @@ class _MenuFormPageState extends State<MenuForm> {
             ListTile(
                 leading: const Icon(
                   Icons.home,
-                  color: Colors.blue,
+                  color: Colors.teal,
                 ),
                 title: const Text(
                   'INICIO',
@@ -54,10 +54,11 @@ class _MenuFormPageState extends State<MenuForm> {
                 onTap: () {
                   Navigator.pop(context);
                 }),
+            const Divider(),
             ListTile(
                 leading: const Icon(
                   Icons.person,
-                  color: Colors.blue,
+                  color: Colors.teal,
                 ),
                 title: const Text(
                   'CLIENTES',
@@ -70,10 +71,11 @@ class _MenuFormPageState extends State<MenuForm> {
                 onTap: () {
                   Navigator.pushNamed(context, 'cliente_form');
                 }),
+            const Divider(),
             ListTile(
                 leading: const Icon(
                   Icons.settings,
-                  color: Colors.blue,
+                  color: Colors.teal,
                 ),
                 title: const Text(
                   'ORDEN DE TRABAJO',
@@ -86,10 +88,11 @@ class _MenuFormPageState extends State<MenuForm> {
                 onTap: () {
                   Navigator.pushNamed(context, 'orden_form');
                 }),
+            const Divider(),
             ListTile(
                 leading: const Icon(
                   Icons.book_online,
-                  color: Colors.blue,
+                  color: Colors.teal,
                 ),
                 title: const Text(
                   'ENCUESTAS',
@@ -102,10 +105,11 @@ class _MenuFormPageState extends State<MenuForm> {
                 onTap: () {
                   Navigator.pushNamed(context, 'encuesta_form');
                 }),
+            const Divider(),
             ListTile(
                 leading: const Icon(
                   Icons.location_on,
-                  color: Colors.blue,
+                  color: Colors.teal,
                 ),
                 title: const Text(
                   'LOCALIZACION',
@@ -116,12 +120,13 @@ class _MenuFormPageState extends State<MenuForm> {
                   ),
                 ),
                 onTap: () {
-                  Navigator.pop(context);
+                  Navigator.pushNamed(context, 'ubicacion_form');
                 }),
+            const Divider(),
             ListTile(
                 leading: const Icon(
                   Icons.close,
-                  color: Colors.blue,
+                  color: Colors.teal,
                 ),
                 title: const Text(
                   'CERRAR SESIÓN',
@@ -133,7 +138,7 @@ class _MenuFormPageState extends State<MenuForm> {
                 ),
                 onTap: () {
                   Navigator.pop(context);
-                }),
+                })
           ],
         ),
       ),

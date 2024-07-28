@@ -16,7 +16,7 @@ class _EncuestaFormState extends State<EncuestaForm> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.deepPurple,
+        backgroundColor: Colors.teal,
         leading: IconButton(
           icon: const Icon(Icons.arrow_back, color: Colors.black),
           onPressed: () {
@@ -24,7 +24,7 @@ class _EncuestaFormState extends State<EncuestaForm> {
           },
         ),
         title: Text(
-          'Formulario Clientes'.toUpperCase(),
+          'Encuestas'.toUpperCase(),
           style: GoogleFonts.dmSerifDisplay(
             color: Colors.black,
             fontSize: 20,
