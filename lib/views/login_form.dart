@@ -33,7 +33,7 @@ class _LoginFormState extends State<LoginForm> {
       appBar: AppBar(
         backgroundColor: Colors.teal,
         title: Text(
-          'FORMULARIO PUCE'.toUpperCase(),
+          'lavadora endara'.toUpperCase(),
           style: GoogleFonts.dmSerifDisplay(
             color: Colors.black,
             fontSize: 20,
@@ -54,7 +54,7 @@ class _LoginFormState extends State<LoginForm> {
                 color: Colors.black.withOpacity(0.5),
                 spreadRadius: 5,
                 blurRadius: 7,
-                offset: Offset(0, 3), // Cambia la posición de la sombra
+                offset: const Offset(0, 3), // Cambia la posición de la sombra
               ),
             ],
           ),
@@ -64,14 +64,10 @@ class _LoginFormState extends State<LoginForm> {
               mainAxisSize: MainAxisSize.min,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                ClipOval(
-                  child: Image.asset(
-                    'lib/imagenes/loginlogo.jpg',
-                    height: 150,
-                    width: 150,
-                    fit: BoxFit.cover,
-                  ),
-                ),
+                const CircleAvatar(
+                    radius: 80,
+                    backgroundImage:
+                        AssetImage('lib/imagenes/logolavadora.png')),
                 const SizedBox(height: 20),
                 TextFormField(
                   controller: _usernameController,

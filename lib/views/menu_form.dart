@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:dark_light_button/dark_light_button.dart';
 
 class MenuForm extends StatefulWidget {
   @override
@@ -10,7 +12,14 @@ class _MenuFormPageState extends State<MenuForm> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Menu de Opciones'),
+        title: Text(
+          'lavadora endara'.toUpperCase(),
+          style: GoogleFonts.dmSerifDisplay(
+            color: Colors.black,
+            fontSize: 20,
+            fontWeight: FontWeight.bold,
+          ),
+        ),
       ),
       drawer: Drawer(
         child: ListView(
@@ -24,12 +33,12 @@ class _MenuFormPageState extends State<MenuForm> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>[
                     CircleAvatar(
-                        radius: 40,
+                        radius: 50,
                         backgroundImage:
-                            AssetImage('lib/imagenes/logopuce.png')),
+                            AssetImage('lib/imagenes/loginlogo.jpg')),
                     SizedBox(height: 10),
                     Text(
-                      'ANDER',
+                      'ADMINISTRACION',
                       style: TextStyle(
                         color: Colors.black,
                         fontSize: 20,
