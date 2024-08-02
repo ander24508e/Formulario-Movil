@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import '../views/login_form.dart';
-import 'page_form.dart';
+import 'package:formulario_movil/empresaforms/page_form.dart';
 
 class ProductosForm extends StatefulWidget {
   @override
@@ -15,6 +15,7 @@ class _ProductosFormPageState extends State<ProductosForm> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        backgroundColor: Colors.teal,
         title: Text(
           'lavadora endara'.toUpperCase(),
           style: GoogleFonts.dmSerifDisplay(
@@ -23,6 +24,7 @@ class _ProductosFormPageState extends State<ProductosForm> {
             fontWeight: FontWeight.bold,
           ),
         ),
+        centerTitle: true,
       ),
       drawer: Drawer(
         child: ListView(
@@ -84,14 +86,17 @@ class _ProductosFormPageState extends State<ProductosForm> {
                   fontWeight: FontWeight.bold,
                 ),
               ),
-                onTap: () {
-                  Navigator.pushNamed(context, 'page_form');
-                }
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => ProductosDetailForm()),
+                );
+              },
             ),
             const Divider(),
             ListTile(
               leading: const Icon(
-                Icons.close,
+                Icons.open_in_browser,
                 color: Colors.teal,
               ),
               title: const Text(
@@ -114,16 +119,14 @@ class _ProductosFormPageState extends State<ProductosForm> {
       ),
       body: showInicio
           ? Center(
-              child: Padding(
-                padding: const EdgeInsets.all(16.0),
-                child: Text(
-                  'Bienvenido a la administración de Lavadora Endara. Aquí puede gestionar sus productos y acceder a configuraciones.',
-                  style: GoogleFonts.dmSerifDisplay(
-                    color: Colors.black,
-                    fontSize: 20,
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: <Widget>[
+                  Image.network(
+                    'https://img.freepik.com/psd-premium/psd-servicio-lavado-autos-promocion-alquiler-oferta-especial-folleto-redes-sociales-anuncio-diseno-carteles_797457-45.jpg',
+                    fit: BoxFit.cover,
                   ),
-                  textAlign: TextAlign.center,
-                ),
+                ],
               ),
             )
           : Center(

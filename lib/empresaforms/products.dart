@@ -25,7 +25,7 @@ List<Producto> productos = [
       description: 'Lavada Express de su Vehiculo - Limpieza interior'),
   Producto(
     name: "Lavada Completa".toUpperCase(),
-    rating: '5:00 am - 23:00 pm',
+    rating: 'GARANTIZADO',
     price: '12 Dólares',
     description: '''
     Lavada Completa de su Vehiculo - Limpieza Interior - Engrasada - Pulverizada

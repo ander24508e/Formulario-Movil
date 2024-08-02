@@ -1,136 +1,93 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'page_form.dart';
+import 'package:formulario_movil/empresaforms/products.dart';
 
-class ProductosForm extends StatefulWidget {
+class ProductosDetailForm extends StatefulWidget {
   @override
-  _ProductosFormPageState createState() => _ProductosFormPageState();
+  _ProductosDetailFormPageState createState() => _ProductosDetailFormPageState();
 }
 
-class _ProductosFormPageState extends State<ProductosForm> {
-  bool showInicio = false;
-
+class _ProductosDetailFormPageState extends State<ProductosDetailForm> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        backgroundColor: Colors.teal,
         title: Text(
-          'lavadora endara'.toUpperCase(),
+          'Lavadora Endara'.toUpperCase(),
           style: GoogleFonts.dmSerifDisplay(
             color: Colors.black,
             fontSize: 20,
             fontWeight: FontWeight.bold,
           ),
         ),
+        centerTitle: true,
       ),
-      drawer: Drawer(
-        child: ListView(
-          padding: EdgeInsets.zero,
-          children: <Widget>[
-            const DrawerHeader(
-              decoration: BoxDecoration(
-                color: Colors.teal,
-              ),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: <Widget>[
-                  CircleAvatar(
-                      radius: 50,
-                      backgroundImage: AssetImage('lib/imagenes/loginlogo.jpg')),
-                  SizedBox(height: 10),
-                  Text(
-                    'ADMINISTRACION',
-                    style: TextStyle(
-                      color: Colors.black,
-                      fontSize: 20,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                ],
-              ),
-            ),
-            ListTile(
-              leading: const Icon(
-                Icons.home,
-                color: Colors.teal,
-              ),
-              title: const Text(
-                'INICIO',
-                style: TextStyle(
-                  color: Colors.black,
-                  fontSize: 20,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-              onTap: () {
-                setState(() {
-                  showInicio = true;
-                });
-                Navigator.pop(context);
-              },
-            ),
-            const Divider(),
-            ListTile(
-              leading: const Icon(
-                Icons.settings,
-                color: Colors.teal,
-              ),
-              title: const Text(
-                'PRODUCTOS',
-                style: TextStyle(
-                  color: Colors.black,
-                  fontSize: 20,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-              onTap: () {
-                  Navigator.pushNamed(context, 'ubicacion_form');
-                }
-            ),
-            const Divider(),
-            ListTile(
-              leading: const Icon(
-                Icons.close,
-                color: Colors.teal,
-              ),
-              title: const Text(
-                'INICIAR SESIÓN',
-                style: TextStyle(
-                  color: Colors.black,
-                  fontSize: 20,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-                onTap: () {
-                  Navigator.pushNamed(context, 'ubicacion_form');
-                }
-            ),
-          ],
-        ),
-      ),
-      body: showInicio
-          ? Center(
-              child: Padding(
-                padding: const EdgeInsets.all(16.0),
-                child: Text(
-                  'Bienvenido a la administración de Lavadora Endara. Aquí puede gestionar sus productos y acceder a configuraciones.',
+      body: PageView.builder(
+        itemCount: productos.length,
+        itemBuilder: (context, index) {
+          final producto = productos[index];
+          return Padding(
+            padding: const EdgeInsets.all(16.0),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: <Widget>[
+                Text(
+                  producto.name,
                   style: GoogleFonts.dmSerifDisplay(
                     color: Colors.black,
-                    fontSize: 20,
+                    fontSize: 24,
+                    fontWeight: FontWeight.bold,
                   ),
-                  textAlign: TextAlign.center,
                 ),
-              ),
-            )
-          : Center(
-              child: Text(
-                'Seleccione una opción del menú.',
-                style: GoogleFonts.dmSerifDisplay(
-                  color: Colors.black,
-                  fontSize: 20,
+                SizedBox(height: 10),
+                Row(
+                  children: <Widget>[
+                    Icon(Icons.star, color: Colors.amber, size: 20),
+                    SizedBox(width: 5),
+                    Text(
+                      producto.rating,
+                      style: GoogleFonts.dmSerifDisplay(
+                        color: Colors.black,
+                        fontSize: 18,
+                      ),
+                    ),
+                  ],
                 ),
-              ),
+                SizedBox(height: 10),
+                Text(
+                  'Price: ${producto.price}',
+                  style: GoogleFonts.dmSerifDisplay(
+                    color: Colors.black,
+                    fontSize: 18,
+                  ),
+                ),
+                SizedBox(height: 10),
+                Text(
+                  'Description:',
+                  style: GoogleFonts.dmSerifDisplay(
+                    color: Colors.black,
+                    fontSize: 18,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                SizedBox(height: 5),
+                Expanded(
+                  child: SingleChildScrollView(
+                    child: Text(
+                      producto.description,
+                      style: GoogleFonts.dmSerifDisplay(
+                        color: Colors.black,
+                        fontSize: 16,
+                      ),
+                    ),
+                  ),
+                ),
+              ],
             ),
+          );
+        },
+      ),
     );
   }
 }

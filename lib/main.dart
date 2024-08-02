@@ -8,7 +8,6 @@ import 'views/orden_form.dart';
 import 'views/register_form.dart';
 import 'empresaforms/productos_form.dart';
 
-
 void main() {
   runApp(const FormularioApp());
 }
@@ -26,7 +25,7 @@ class FormularioApp extends StatelessWidget {
         ),
         home: ProductosForm(),
         routes: {
-          'page_form': (context) => ProductosForm(),
+          'productos_form': (context) => ProductosForm(),
           'login_form': (context) => LoginForm(),
           'register_form': (context) => RegisterForm(),
           'cliente_form': (context) => ClienteForm(),

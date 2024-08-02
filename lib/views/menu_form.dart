@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:dark_light_button/dark_light_button.dart';
+import 'package:formulario_movil/empresaforms/productos_form.dart';
 
 class MenuForm extends StatefulWidget {
   @override
@@ -12,6 +12,7 @@ class _MenuFormPageState extends State<MenuForm> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        backgroundColor: Colors.teal,
         title: Text(
           'lavadora endara'.toUpperCase(),
           style: GoogleFonts.dmSerifDisplay(
@@ -20,6 +21,7 @@ class _MenuFormPageState extends State<MenuForm> {
             fontWeight: FontWeight.bold,
           ),
         ),
+        centerTitle: true,
       ),
       drawer: Drawer(
         child: ListView(
@@ -145,9 +147,13 @@ class _MenuFormPageState extends State<MenuForm> {
                     fontWeight: FontWeight.bold,
                   ),
                 ),
-                onTap: () {
-                  Navigator.pop(context);
-                })
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => ProductosForm()),
+                );
+              },
+                )
           ],
         ),
       ),
