@@ -16,7 +16,7 @@ dependencies:
   url_launcher: ^6.2.4
   sqflite: ^2.3.3+1
   path: ^1.8.0
-  google_maps_flutter: ^2.7.0
+  google_maps_flutter: ^2.7.1
   dark_light_button: ^0.0.2
 
 dev_dependencies:
