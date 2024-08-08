@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:formulario_movil/empresaforms/productos_form.dart';
+import 'package:formulario_movil/empresaforms/empresa_form.dart';
 
 class MenuForm extends StatefulWidget {
   @override
@@ -14,7 +14,7 @@ class _MenuFormPageState extends State<MenuForm> {
       appBar: AppBar(
         backgroundColor: Colors.teal,
         title: Text(
-          'lavadora endara'.toUpperCase(),
+          'LAVADORA ENDARA'.toUpperCase(),
           style: GoogleFonts.dmSerifDisplay(
             color: Colors.black,
             fontSize: 20,
@@ -135,25 +135,25 @@ class _MenuFormPageState extends State<MenuForm> {
                 }),
             const Divider(),
             ListTile(
-                leading: const Icon(
-                  Icons.close,
-                  color: Colors.teal,
+              leading: const Icon(
+                Icons.close,
+                color: Colors.teal,
+              ),
+              title: const Text(
+                'CERRAR SESIÓN',
+                style: TextStyle(
+                  color: Colors.black,
+                  fontSize: 20,
+                  fontWeight: FontWeight.bold,
                 ),
-                title: const Text(
-                  'CERRAR SESIÓN',
-                  style: TextStyle(
-                    color: Colors.black,
-                    fontSize: 20,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
+              ),
               onTap: () {
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => ProductosForm()),
+                  MaterialPageRoute(builder: (context) => EmpresaForm()),
                 );
               },
-                )
+            )
           ],
         ),
       ),

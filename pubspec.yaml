@@ -18,6 +18,7 @@ dependencies:
   path: ^1.8.0
   google_maps_flutter: ^2.7.1
   dark_light_button: ^0.0.2
+  flutter_rating_bar: ^4.0.1
 
 dev_dependencies:
   flutter_test:

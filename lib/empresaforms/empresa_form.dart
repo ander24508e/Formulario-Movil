@@ -3,12 +3,12 @@ import 'package:google_fonts/google_fonts.dart';
 import '../views/login_form.dart';
 import 'package:formulario_movil/empresaforms/page_form.dart';
 
-class ProductosForm extends StatefulWidget {
+class EmpresaForm extends StatefulWidget {
   @override
-  _ProductosFormPageState createState() => _ProductosFormPageState();
+  _EmpresaFormPageState createState() => _EmpresaFormPageState();
 }
 
-class _ProductosFormPageState extends State<ProductosForm> {
+class _EmpresaFormPageState extends State<EmpresaForm> {
   bool showInicio = false;
 
   @override

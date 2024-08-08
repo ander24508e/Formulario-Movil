@@ -6,7 +6,8 @@ import 'views/menu_form.dart';
 import 'views/encuesta_form.dart';
 import 'views/orden_form.dart';
 import 'views/register_form.dart';
-import 'empresaforms/productos_form.dart';
+import 'empresaforms/empresa_form.dart';
+import 'database/lista_cliente_form.dart';
 
 void main() {
   runApp(const FormularioApp());
@@ -23,16 +24,17 @@ class FormularioApp extends StatelessWidget {
           colorScheme: ColorScheme.fromSeed(seedColor: Colors.green),
           useMaterial3: true,
         ),
-        home: ProductosForm(),
+        home: EmpresaForm(),
         routes: {
-          'productos_form': (context) => ProductosForm(),
+          'empresa_form': (context) => EmpresaForm(),
           'login_form': (context) => LoginForm(),
           'register_form': (context) => RegisterForm(),
           'cliente_form': (context) => ClienteForm(),
+          'lista_clientes_form': (context) => ListaClientes(),
           'menu_form': (context) => MenuForm(),
           'encuesta_form': (context) => EncuestaForm(),
           'orden_form': (context) => OrdenForm(),
-          'ubicacion_form': (context) => UbicacionForm() 
+          'ubicacion_form': (context) => UbicacionForm()
         });
   }
 }

@@ -1,30 +1,51 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:formulario_movil/database/database_form.dart';
+import 'package:formulario_movil/database/lista_cliente_form.dart';
 
+// Define la clase ClienteForm para que sea un StatefulWidget
 class ClienteForm extends StatefulWidget {
   @override
-  State<ClienteForm> createState() => _ClienteFormState();
+  _ClienteFormState createState() => _ClienteFormState();
 }
 
 class _ClienteFormState extends State<ClienteForm> {
-  final _formKey = GlobalKey<FormState>();
   final _apellidoController = TextEditingController();
   final _nombreController = TextEditingController();
   final _correoController = TextEditingController();
   final _telefonoController = TextEditingController();
-
   String? _sexo;
   String? _estadoCivil;
-  bool _isSubmitted = false;
+  final DataBaseForm _db = DataBaseForm();
 
-  String? _validateDropdown(String? value) {
-    if (value == null || value.isEmpty) {
-      return "Seleccione una opción";
+  final _formKey = GlobalKey<FormState>();
+
+  void _addClient() async {
+    if (_formKey.currentState!.validate()) {
+      Map<String, dynamic> client = {
+        'apellido': _apellidoController.text,
+        'nombre': _nombreController.text,
+        'correo': _correoController.text,
+        'telefono': _telefonoController.text,
+        'sexo': _sexo,
+        'estadoCivil': _estadoCivil
+      };
+      await _db.insertClient(client);
+      _clearForm();
+      setState(() {
+        // Si no se usa, puedes eliminar _isSubmitted
+      });
+      // Navegar a la pantalla de lista de clientes
+      if (mounted) {
+        Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(builder: (context) => ListaClientes()),
+        );
+      }
     }
-    return null;
   }
 
-  void _limpiar() {
+  void _clearForm() {
     _apellidoController.clear();
     _nombreController.clear();
     _correoController.clear();
@@ -32,8 +53,14 @@ class _ClienteFormState extends State<ClienteForm> {
     setState(() {
       _sexo = null;
       _estadoCivil = null;
-      _isSubmitted = false;
     });
+  }
+
+  String? _validateDropdown(String? value) {
+    if (value == null || value.isEmpty) {
+      return 'Por favor selecciona una opción';
+    }
+    return null;
   }
 
   @override
@@ -41,14 +68,8 @@ class _ClienteFormState extends State<ClienteForm> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.teal,
-        actions: [
-          IconButton(
-            onPressed: () => {},
-            icon: const Icon(Icons.more_vert, color: Colors.black),
-          ),
-        ],
         title: Text(
-          'Formulario Clientes'.toUpperCase(),
+          'Listado Clientes'.toUpperCase(),
           style: GoogleFonts.dmSerifDisplay(
             color: Colors.black,
             fontSize: 20,
@@ -56,127 +77,86 @@ class _ClienteFormState extends State<ClienteForm> {
           ),
         ),
         centerTitle: true,
-        leading: IconButton(
-          icon: const Icon(Icons.arrow_back, color: Colors.black),
-          onPressed: () {
-            Navigator.pushNamed(context, 'menu_form');
-          },
-        ),
       ),
       body: Padding(
-        padding: const EdgeInsets.all(20),
+        padding: const EdgeInsets.all(20.0),
         child: Form(
           key: _formKey,
           child: ListView(
             children: [
-              // APELLIDOS
               TextFormField(
                 controller: _apellidoController,
                 decoration: InputDecoration(
-                  enabledBorder: OutlineInputBorder(
-                      borderSide: const BorderSide(color: Colors.black12),
-                      borderRadius: BorderRadius.circular(20)),
-                  focusedBorder: OutlineInputBorder(
-                      borderSide: const BorderSide(
-                          color: Color.fromARGB(242, 34, 34, 34)),
-                      borderRadius: BorderRadius.circular(20)),
-                  hintText: "Apellidos".toUpperCase(),
-                  prefixIcon: const Icon(Icons.person),
-                  prefixIconColor: const Color.fromARGB(242, 34, 34, 34),
+                  labelText: 'Apellido',
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(20.0),
+                  ),
                 ),
                 validator: (value) {
                   if (value == null || value.isEmpty) {
-                    return "Ingrese Apellido Válido";
+                    return 'Por favor ingrese su apellido';
                   }
                   return null;
                 },
               ),
               const SizedBox(height: 20),
-              // NOMBRES
               TextFormField(
                 controller: _nombreController,
                 decoration: InputDecoration(
-                  enabledBorder: OutlineInputBorder(
-                      borderSide: const BorderSide(color: Colors.black12),
-                      borderRadius: BorderRadius.circular(20)),
-                  focusedBorder: OutlineInputBorder(
-                      borderSide: const BorderSide(
-                          color: Color.fromARGB(242, 34, 34, 34)),
-                      borderRadius: BorderRadius.circular(20)),
-                  hintText: "Nombres".toUpperCase(),
-                  prefixIcon: const Icon(Icons.person),
-                  prefixIconColor: const Color.fromARGB(242, 34, 34, 34),
+                  labelText: 'Nombre',
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(20.0),
+                  ),
                 ),
                 validator: (value) {
                   if (value == null || value.isEmpty) {
-                    return "Ingrese Nombre Válido";
+                    return 'Por favor ingrese su nombre';
                   }
                   return null;
                 },
               ),
               const SizedBox(height: 20),
-              // CORREO
               TextFormField(
                 controller: _correoController,
                 decoration: InputDecoration(
-                  enabledBorder: OutlineInputBorder(
-                      borderSide: const BorderSide(color: Colors.black12),
-                      borderRadius: BorderRadius.circular(20)),
-                  focusedBorder: OutlineInputBorder(
-                      borderSide: const BorderSide(
-                          color: Color.fromARGB(242, 34, 34, 34)),
-                      borderRadius: BorderRadius.circular(20)),
-                  hintText: "Correo Electrónico".toUpperCase(),
-                  prefixIcon: const Icon(Icons.email),
-                  prefixIconColor: const Color.fromARGB(242, 34, 34, 34),
+                  labelText: 'Correo',
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(20.0),
+                  ),
                 ),
                 validator: (value) {
                   if (value == null || value.isEmpty) {
-                    return "Ingrese Correo Electrónico Válido";
+                    return 'Por favor ingrese su correo';
                   }
                   return null;
                 },
               ),
               const SizedBox(height: 20),
-              // TELÉFONO
               TextFormField(
                 controller: _telefonoController,
-                keyboardType: TextInputType.number,
                 decoration: InputDecoration(
-                  enabledBorder: OutlineInputBorder(
-                      borderSide: const BorderSide(color: Colors.black12),
-                      borderRadius: BorderRadius.circular(20)),
-                  focusedBorder: OutlineInputBorder(
-                      borderSide: const BorderSide(
-                          color: Color.fromARGB(242, 34, 34, 34)),
-                      borderRadius: BorderRadius.circular(20)),
-                  hintText: "Teléfono".toUpperCase(),
-                  prefixIcon: const Icon(Icons.phone),
-                  prefixIconColor: const Color.fromARGB(242, 34, 34, 34),
+                  labelText: 'Teléfono',
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(20.0),
+                  ),
                 ),
                 validator: (value) {
                   if (value == null || value.isEmpty) {
-                    return "Ingrese Teléfono Válido";
+                    return 'Por favor ingrese su teléfono';
                   }
                   return null;
                 },
               ),
               const SizedBox(height: 20),
-              // ESTADO CIVIL
               DropdownButtonFormField<String>(
-                value: _estadoCivil,
+                value: _sexo,
                 onChanged: (String? newValue) {
                   setState(() {
-                    _estadoCivil = newValue;
+                    _sexo = newValue;
                   });
                 },
-                items: <String>[
-                  "Soltero",
-                  "Casado",
-                  "Divorciado",
-                  "Union Libre",
-                  "Ricardo Arias"
-                ].map<DropdownMenuItem<String>>((String value) {
+                items: <String>["Masculino", "Femenino"]
+                    .map<DropdownMenuItem<String>>((String value) {
                   return DropdownMenuItem<String>(
                     value: value,
                     child: Text(value),
@@ -190,76 +170,32 @@ class _ClienteFormState extends State<ClienteForm> {
                       borderSide: const BorderSide(
                           color: Color.fromARGB(242, 34, 34, 34)),
                       borderRadius: BorderRadius.circular(20)),
-                  hintText: "Estado Civil".toUpperCase(),
-                  prefixIcon: const Icon(Icons.people),
+                  hintText: "Sexo".toUpperCase(),
+                  prefixIcon: const Icon(Icons.transgender),
                   prefixIconColor: const Color.fromARGB(242, 34, 34, 34),
                 ),
                 validator: _validateDropdown,
               ),
               const SizedBox(height: 20),
-              // SEXO
-              InputDecorator(
-                decoration: InputDecoration(
-                  enabledBorder: OutlineInputBorder(
-                      borderSide: const BorderSide(color: Colors.black12),
-                      borderRadius: BorderRadius.circular(20)),
-                  focusedBorder: OutlineInputBorder(
-                      borderSide: const BorderSide(
-                          color: Color.fromARGB(242, 34, 34, 34)),
-                      borderRadius: BorderRadius.circular(20)),
-                  labelText: "Sexo".toUpperCase(),
-                  errorText: _isSubmitted && _sexo == null
-                      ? "Seleccione una opción"
-                      : null,
+              ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: Colors.teal,
+                  foregroundColor: Colors.white,
+                  padding: const EdgeInsets.symmetric(
+                      horizontal: 30.0, vertical: 15.0),
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(20.0)),
                 ),
-                child: Column(
-                  children: [
-                    RadioListTile<String>(
-                      title: const Text("Masculino"),
-                      value: "Masculino",
-                      groupValue: _sexo,
-                      onChanged: (String? value) {
-                        setState(() {
-                          _sexo = value;
-                        });
-                      },
-                    ),
-                    RadioListTile<String>(
-                      title: const Text("Femenino"),
-                      value: "Femenino",
-                      groupValue: _sexo,
-                      onChanged: (String? value) {
-                        setState(() {
-                          _sexo = value;
-                        });
-                      },
-                    ),
-                  ],
+                onPressed: _addClient,
+                child: Text(
+                  "GUARDAR",
+                  style: GoogleFonts.dmSerifDisplay(
+                    color: Colors.black,
+                    fontSize: 20,
+                    fontWeight: FontWeight.bold,
+                  ),
                 ),
               ),
-              const SizedBox(height: 20),
-              // BOTÓN ENVIAR
-              ElevatedButton(
-                onPressed: () {
-                  setState(() {
-                    _isSubmitted = true;
-                  });
-                  if (_formKey.currentState!.validate() && _sexo != null) {
-                    ScaffoldMessenger.of(context).showSnackBar(
-                      const SnackBar(
-                          content: Text("CLIENTE REGISTRADO EXITOSAMENTE")),
-                    );
-                  }
-                },
-                child: const Text("REGISTRAR"),
-              ),
-              const SizedBox(height: 5),
-              // BOTÓN LIMPIAR
-              ElevatedButton(
-                onPressed: _limpiar,
-                child: const Text("LIMPIAR"),
-              ),
-              const SizedBox(height: 5),
             ],
           ),
         ),
