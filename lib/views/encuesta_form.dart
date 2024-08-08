@@ -9,11 +9,27 @@ class EncuestaForm extends StatefulWidget {
 
 class _EncuestaFormState extends State<EncuestaForm> {
   final _formKey = GlobalKey<FormState>();
-  final _nombreController = TextEditingController();
   final _fechaController = TextEditingController();
-  double _pregunta1Rating = 3.0; // Valor inicial para el ranking
-  double _pregunta2Rating = 3.0; // Valor inicial para el ranking
+  double _pregunta1Rating = 2.0; // Valor inicial para el ranking
+  double _pregunta2Rating = 2.0;
+  double _pregunta3Rating = 2.0; // Valor inicial para el ranking
+  double _pregunta4Rating = 2.0; // Valor inicial para el ranking
   bool _isSubmitted = false;
+
+  Future<void> _selectDate(BuildContext context) async {
+    final DateTime? pickedDate = await showDatePicker(
+      context: context,
+      initialDate: DateTime.now(),
+      firstDate: DateTime(1900),
+      lastDate: DateTime(2100),
+    );
+
+    if (pickedDate != null) {
+      setState(() {
+        _fechaController.text = '${pickedDate.toLocal()}'.split(' ')[0];
+      });
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -43,39 +59,32 @@ class _EncuestaFormState extends State<EncuestaForm> {
           child: ListView(
             children: [
               // Campo para el nombre
-              TextFormField(
-                controller: _nombreController,
-                decoration: InputDecoration(
-                  labelText: 'Nombre',
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(20.0),
-                  ),
-                ),
-                validator: (value) {
-                  if (value == null || value.isEmpty) {
-                    return 'Ingrese su nombre';
-                  }
-                  return null;
-                },
-              ),
               const SizedBox(height: 20),
-
-              // Campo para la fecha
-              TextFormField(
-                controller: _fechaController,
-                decoration: InputDecoration(
-                  labelText: 'Fecha',
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(20.0),
+              Row(
+                children: [
+                  Expanded(
+                    child: TextFormField(
+                      controller: _fechaController,
+                      readOnly: true,
+                      decoration: InputDecoration(
+                        labelText: 'Fecha',
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(20.0),
+                        ),
+                      ),
+                      validator: (value) {
+                        if (value == null || value.isEmpty) {
+                          return 'Ingrese la fecha';
+                        }
+                        return null;
+                      },
+                    ),
                   ),
-                ),
-                validator: (value) {
-                  if (value == null || value.isEmpty) {
-                    return 'Ingrese la fecha';
-                  }
-                  return null;
-                },
-                keyboardType: TextInputType.datetime,
+                  IconButton(
+                    icon: Icon(Icons.calendar_today),
+                    onPressed: () => _selectDate(context),
+                  ),
+                ],
               ),
               const SizedBox(height: 20),
 
@@ -84,6 +93,7 @@ class _EncuestaFormState extends State<EncuestaForm> {
                 'Pregunta 1: ¿Cómo calificaría nuestro servicio?',
                 style: GoogleFonts.dmSerifDisplay(fontSize: 16),
               ),
+              const SizedBox(height: 5),
               RatingBar.builder(
                 initialRating: _pregunta1Rating,
                 minRating: 1,
@@ -93,7 +103,7 @@ class _EncuestaFormState extends State<EncuestaForm> {
                 itemPadding: const EdgeInsets.symmetric(horizontal: 4.0),
                 itemBuilder: (context, _) => Icon(
                   Icons.star,
-                  color: Colors.amber,
+                  color: Colors.yellow,
                 ),
                 onRatingUpdate: (rating) {
                   setState(() {
@@ -102,12 +112,12 @@ class _EncuestaFormState extends State<EncuestaForm> {
                 },
               ),
               const SizedBox(height: 20),
-
               // Pregunta 2 con ranking
               Text(
-                'Pregunta 2: ¿Qué tan satisfecho está con nuestro producto?',
+                'Pregunta 2: ¿Qué tan satisfecho está con nuestros servicios?',
                 style: GoogleFonts.dmSerifDisplay(fontSize: 16),
               ),
+              const SizedBox(height: 5),
               RatingBar.builder(
                 initialRating: _pregunta2Rating,
                 minRating: 1,
@@ -115,9 +125,9 @@ class _EncuestaFormState extends State<EncuestaForm> {
                 allowHalfRating: true,
                 itemCount: 5,
                 itemPadding: const EdgeInsets.symmetric(horizontal: 4.0),
-                itemBuilder: (context, _) => Icon(
+                itemBuilder: (context, _) => const Icon(
                   Icons.star,
-                  color: Colors.amber,
+                  color: Colors.yellow,
                 ),
                 onRatingUpdate: (rating) {
                   setState(() {
@@ -126,7 +136,52 @@ class _EncuestaFormState extends State<EncuestaForm> {
                 },
               ),
               const SizedBox(height: 20),
-
+              Text(
+                'Pregunta 3: ¿Que recomendaciones le daria a nuestro servicio?',
+                style: GoogleFonts.dmSerifDisplay(fontSize: 16),
+              ),
+              const SizedBox(height: 5),
+              RatingBar.builder(
+                initialRating: _pregunta3Rating,
+                minRating: 1,
+                direction: Axis.horizontal,
+                allowHalfRating: true,
+                itemCount: 5,
+                itemPadding: const EdgeInsets.symmetric(horizontal: 4.0),
+                itemBuilder: (context, _) => const Icon(
+                  Icons.star,
+                  color: Colors.yellow,
+                ),
+                onRatingUpdate: (rating) {
+                  setState(() {
+                    _pregunta3Rating = rating;
+                  });
+                },
+              ),
+              const SizedBox(height: 20),
+              Text(
+                'Pregunta 4: ¿Qué le gustaria que le agreguemos a nuestro servicio?',
+                style: GoogleFonts.dmSerifDisplay(fontSize: 16),
+              ),
+              const SizedBox(height: 5),
+              RatingBar.builder(
+                initialRating: _pregunta4Rating,
+                minRating: 1,
+                direction: Axis.horizontal,
+                allowHalfRating: true,
+                itemCount: 5,
+                itemPadding: const EdgeInsets.symmetric(horizontal: 4.0),
+                itemBuilder: (context, _) => const Icon(
+                  Icons.star,
+                  color: Colors.yellow,
+                ),
+                onRatingUpdate: (rating) {
+                  setState(() {
+                    _pregunta4Rating = rating;
+                  });
+                },
+              ),
+              const SizedBox(height: 20),
               // Botón para enviar
               ElevatedButton(
                 onPressed: () {
@@ -139,6 +194,8 @@ class _EncuestaFormState extends State<EncuestaForm> {
                         content: Text("ENCUESTA ENVIADA EXITOSAMENTE"),
                       ),
                     );
+                    // Redirigir al menu_form
+                    Navigator.pushReplacementNamed(context, 'menu_form');
                   }
                 },
                 style: ElevatedButton.styleFrom(

@@ -209,9 +209,6 @@ class _RegisterFormState extends State<RegisterForm> {
                   if (value == null || value.isEmpty) {
                     return 'Ingrese Contraseña Válida';
                   }
-                  if (value.length > 10) {
-                    return 'La contraseña no puede tener más de 10 dígitos';
-                  }
                   return null;
                 },
               ),
@@ -228,10 +225,7 @@ class _RegisterFormState extends State<RegisterForm> {
                 ),
                 validator: (value) {
                   if (value == null || value.isEmpty) {
-                    return 'Ingrese Contraseña Válida';
-                  }
-                  if (value.length > 10) {
-                    return 'La contraseña no puede tener más de 10 dígitos';
+                    return 'Confirme su Contraseña';
                   }
                   return null;
                 },
@@ -250,9 +244,6 @@ class _RegisterFormState extends State<RegisterForm> {
                 validator: (value) {
                   if (value == null || value.isEmpty) {
                     return 'Ingrese Teléfono Válido';
-                  }
-                  if (value.length > 10) {
-                    return 'El teléfono no puede tener más de 10 dígitos';
                   }
                   return null;
                 },

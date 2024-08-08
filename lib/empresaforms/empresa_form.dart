@@ -17,7 +17,7 @@ class _EmpresaFormPageState extends State<EmpresaForm> {
       appBar: AppBar(
         backgroundColor: Colors.teal,
         title: Text(
-          'lavadora endara'.toUpperCase(),
+          'CONCESIONARIA'.toUpperCase(),
           style: GoogleFonts.dmSerifDisplay(
             color: Colors.black,
             fontSize: 20,
@@ -39,7 +39,8 @@ class _EmpresaFormPageState extends State<EmpresaForm> {
                 children: <Widget>[
                   CircleAvatar(
                       radius: 50,
-                      backgroundImage: AssetImage('lib/imagenes/loginlogo.jpg')),
+                      backgroundImage:
+                          AssetImage('lib/imagenes/loginlogo.jpg')),
                   SizedBox(height: 10),
                   Text(
                     'ADMINISTRACION',
@@ -89,7 +90,8 @@ class _EmpresaFormPageState extends State<EmpresaForm> {
               onTap: () {
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => ProductosDetailForm()),
+                  MaterialPageRoute(
+                      builder: (context) => ProductosDetailForm()),
                 );
               },
             ),
@@ -118,15 +120,102 @@ class _EmpresaFormPageState extends State<EmpresaForm> {
         ),
       ),
       body: showInicio
-          ? Center(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: <Widget>[
-                  Image.network(
-                    'https://img.freepik.com/psd-premium/psd-servicio-lavado-autos-promocion-alquiler-oferta-especial-folleto-redes-sociales-anuncio-diseno-carteles_797457-45.jpg',
-                    fit: BoxFit.cover,
-                  ),
-                ],
+          ? Padding(
+              padding: const EdgeInsets.all(16.0),
+              child: SingleChildScrollView(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: <Widget>[
+                    Text(
+                      'Bienvenido a nuestra Concesionaria de Vehículos',
+                      textAlign: TextAlign.center,
+                      style: GoogleFonts.dmSerifDisplay(
+                        color: Colors.teal,
+                        fontSize: 24,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    SizedBox(height: 20),
+                    Text(
+                      'Encuentra el auto de tus sueños con nosotros.',
+                      style: GoogleFonts.dmSerifDisplay(
+                        color: Colors.black,
+                        fontSize: 18,
+                      ),
+                    ),
+                    SizedBox(height: 20),
+                    Text(
+                      'Nuestros Servicios:',
+                      style: GoogleFonts.dmSerifDisplay(
+                        color: Colors.teal,
+                        fontSize: 20,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    SizedBox(height: 10),
+                    Text(
+                      '- Venta de vehículos nuevos y usados\n'
+                      '- Financiamiento personalizado\n'
+                      '- Servicio de mantenimiento y reparaciones\n'
+                      '- Asesoramiento en seguros vehiculares',
+                      style: GoogleFonts.dmSerifDisplay(
+                        color: Colors.black,
+                        fontSize: 18,
+                      ),
+                    ),
+                    SizedBox(height: 20),
+                    Text(
+                      '¿Por qué elegirnos?',
+                      style: GoogleFonts.dmSerifDisplay(
+                        color: Colors.teal,
+                        fontSize: 20,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    SizedBox(height: 10),
+                    Text(
+                      '- Amplia gama de vehículos de diferentes marcas\n'
+                      '- Personal altamente capacitado\n'
+                      '- Instalaciones modernas y cómodas\n'
+                      '- Atención al cliente excepcional',
+                      style: GoogleFonts.dmSerifDisplay(
+                        color: Colors.black,
+                        fontSize: 18,
+                      ),
+                    ),
+                    SizedBox(height: 20),
+                    Text(
+                      'Visítanos y descubre las mejores ofertas en vehículos del mercado.',
+                      style: GoogleFonts.dmSerifDisplay(
+                        color: Colors.black,
+                        fontSize: 18,
+                        fontStyle: FontStyle.italic,
+                      ),
+                    ),
+                    SizedBox(height: 30),
+                    ElevatedButton(
+                      onPressed: () {
+                        // Acción al presionar el botón
+                      },
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: Colors.teal,
+                        padding: const EdgeInsets.symmetric(
+                            vertical: 15, horizontal: 30),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(20),
+                        ),
+                      ),
+                      child: Text(
+                        'Ver Vehículos Disponibles',
+                        style: GoogleFonts.dmSerifDisplay(
+                          color: Colors.white,
+                          fontSize: 18,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
               ),
             )
           : Center(

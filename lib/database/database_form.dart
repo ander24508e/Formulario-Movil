@@ -27,12 +27,14 @@ class DataBaseForm {
     await db.execute('''
       CREATE TABLE clientes(
         id INTEGER PRIMARY KEY AUTOINCREMENT,
+        cedula TEXT,
         apellido TEXT,
         nombre TEXT,
         correo TEXT, 
         telefono TEXT,
         sexo TEXT,
-        estadoCivil TEXT
+        estadoCivil TEXT,
+        direccion TEXT
       )
     ''');
   }
@@ -55,5 +57,7 @@ class DataBaseForm {
       print('Error al obtener clientes: $e');
       rethrow;
     }
-  } 
+  }
+
+  
 }
